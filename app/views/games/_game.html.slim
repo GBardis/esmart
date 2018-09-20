@@ -1,6 +1,6 @@
 tr
   td
-    = image_tag game.logo.variant(resize: '100x75'), alt: game.title, title: game.title
+    = image_tag game.logo_mini, alt: game.title, title: game.title
   td= game.title
   td= GamerProfile.where(game: game, user: current_user).first&.handle
   td

@@ -1,6 +1,6 @@
 .card
   h5.card-header My profile
-  = image_tag current_user.avatar.variant(combine_options: { thumbnail: '300x300^', extent: '300x300', gravity: 'center' }), class: 'card-img-top'
+  = image_tag current_user.avatar_large, class: 'card-img-top'
   .card-body.text-center
     = current_user.reputation_badge
   .card-footer

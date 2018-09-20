@@ -2,8 +2,14 @@ require 'test_helper'
 
 class MatchesControllerTest < ActionDispatch::IntegrationTest
 
-  test 'something' do
-    skip 'todo'
+  setup do
+    @user = users(:ken)
+    sign_in @user, scope: :user
+  end
+
+  test 'get index' do
+    get matches_url
+    assert_response :success
   end
 
 end

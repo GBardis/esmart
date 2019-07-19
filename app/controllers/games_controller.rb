@@ -4,7 +4,7 @@ class GamesController < ApplicationController
   before_action :set_game, except: [:index]
 
   def index
-    @games = policy_scope(Game)
+    @games = policy_scope(Game).decorate
   end
 
   def add

@@ -2,7 +2,7 @@ class User < ApplicationRecord
   include SoftDeletable
   include RemovableFile
 
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :trackable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :trackable, :confirmable
 
   has_removable_file :avatar
 

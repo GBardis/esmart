@@ -2,9 +2,9 @@ tr
   td
     = image_tag game.logo_mini, alt: game.title, title: game.title
   td= game.title
-  td= GamerProfile.where(game: game, user: current_user).first&.handle
+  td= game.gamer_profiles.find{|gamer_profile| gamer_profile.game == game && gamer_profile.user_id == current_user.id }&.handle
   td
-    - if current_user.games.include?(game)
+    - if @current_user_games.include?(game.id)
       = link_to remove_game_path(game), method: :post, class: 'btn btn-danger', title: 'Remove from my games' do
         i.fa.fa-times
         |&nbsp;

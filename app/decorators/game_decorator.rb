@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class GameDecorator < Draper::Decorator
   delegate_all
 
@@ -8,5 +10,4 @@ class GameDecorator < Draper::Decorator
       h.asset_pack_path('images/default_logo_mini.png')
     end
   end
-
 end

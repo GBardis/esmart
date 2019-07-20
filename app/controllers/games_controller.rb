@@ -1,10 +1,13 @@
+# frozen_string_literal: true
+
 class GamesController < ApplicationController
   include Pundit
 
   before_action :set_game, except: [:index]
 
   def index
-    @games = policy_scope(Game).decorate
+    @games = policy_scope(Game.includes(:gamer_profiles).with_attached_logo).decorate
+    @current_user_games = current_user.games.pluck(:id)
   end
 
   def add
@@ -30,5 +33,4 @@ class GamesController < ApplicationController
   def set_game
     @game = Game.find(params[:id])
   end
-
 end

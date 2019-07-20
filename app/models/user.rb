@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   include SoftDeletable
   include RemovableFile
@@ -9,7 +11,7 @@ class User < ApplicationRecord
   # Associations
   has_many :gamer_profiles
   has_many :games, -> { order(:title) }, through: :gamer_profiles
-  has_many :matches_played, -> (object) { unscope(:where).where('player1_id = :player_id OR player2_id = :player_id', player_id: object.id) }, class_name: 'Match'
+  has_many :matches_played, ->(object) { unscope(:where).where('player1_id = :player_id OR player2_id = :player_id', player_id: object.id) }, class_name: 'Match'
   has_many :matches_won, class_name: 'Match', foreign_key: :winner_id
 
   has_one_attached :avatar
@@ -27,8 +29,6 @@ class User < ApplicationRecord
   private
 
   def fetch_reputation
-    self.reputation = ReputationFetcher.fetch(email)
-    save if reputation_changed?
+    ::ReputationWorker.perform_async(email)
   end
-
 end

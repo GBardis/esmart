@@ -29,5 +29,4 @@ class MatchDecorator < Draper::Decorator
       h.tag.span 'finished'.capitalize, class: 'badge badge-secondary'
     end
   end
-
 end

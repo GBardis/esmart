@@ -1,5 +1,3 @@
- 
-
 class Game < ApplicationRecord
   # Associations
   has_many :gamer_profiles
@@ -14,6 +12,7 @@ class Game < ApplicationRecord
   # Validations
   validates :title, presence: true
   validates :slug, presence: true, uniqueness: true
+  validates :api_url, url: true
 
   # Scopes
   scope :enabled, -> { where(enabled: true) }

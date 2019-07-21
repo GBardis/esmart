@@ -14,6 +14,9 @@ class User < ApplicationRecord
 
   has_one_attached :avatar
 
+  has_one :avatar_attachment, -> { where(name: 'avatar') }, class_name: 'ActiveStorage::Attachment', as: :record, inverse_of: :record, dependent: false
+  has_one :avatar_blob, through: :image_attachment, class_name: 'ActiveStorage::Blob', source: :blob
+
   # Validations
   validates :reputation, numericality: true, allow_nil: true
 

@@ -1,5 +1,3 @@
- 
-
 class GamesController < ApplicationController
   include Pundit
 

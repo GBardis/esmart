@@ -27,5 +27,4 @@ class UserDecorator < Draper::Decorator
       h.asset_pack_path('images/default_avatar_mini.png')
     end
   end
-
 end

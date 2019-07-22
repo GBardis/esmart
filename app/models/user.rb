@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
   has_removable_file :avatar
 
-  # Associations
+  has_one :auth_token
   has_many :gamer_profiles
   has_many :games, -> { order(:title) }, through: :gamer_profiles
   has_many :matches_played, ->(object) { unscope(:where).where('player1_id = :player_id OR player2_id = :player_id', player_id: object.id) }, class_name: 'Match'

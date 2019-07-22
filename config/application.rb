@@ -11,5 +11,7 @@ module Esmart
     config.generators do |g|
       g.test_framework :minitest, spec: false, fixture: false
     end
+
+    config.autoload_paths += Dir[Rails.root.join('lib')]
   end
 end

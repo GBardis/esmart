@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     post :remove, on: :member
   end
 
-  resources :matches, only: [:index, :new, :create]
+  resources :matches, only: %i[index new create]
 
   root to: 'dashboards#show'
 end

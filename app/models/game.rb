@@ -1,6 +1,6 @@
 class Game < ApplicationRecord
   # Associations
-  has_many :gamer_profiles
+  has_many :gamer_profiles, dependent: :destroy
   has_many :users, through: :gamer_profiles, dependent: :destroy
   has_many :matches
 

@@ -6,9 +6,9 @@ class User < ApplicationRecord
 
   has_removable_file :avatar
 
-  has_one :auth_token
-  has_many :gamer_profiles
-  has_many :games, -> { order(:title) }, through: :gamer_profiles
+  # Associations
+  has_many :gamer_profiles, dependent: :destroy
+  has_many :games, -> { order(:title) }, through: :gamer_profiles, dependent: :destroy
   has_many :matches_played, ->(object) { unscope(:where).where('player1_id = :player_id OR player2_id = :player_id', player_id: object.id) }, class_name: 'Match'
   has_many :matches_won, class_name: 'Match', foreign_key: :winner_id
 
@@ -25,6 +25,10 @@ class User < ApplicationRecord
 
   def cheater?
     reputation && reputation < 7.0
+  end
+
+  def active_for_authentication?
+    super && !deleted_at
   end
 
   private

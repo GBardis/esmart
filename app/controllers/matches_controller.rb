@@ -17,12 +17,13 @@ class MatchesController < ApplicationController
 
   def create
     @match = Match.new(match_params)
+    authorize @match
     @match.player1_id = current_user.id
     @match.winner_id = [@match.player1_id, @match.player2_id].sample
     if @match.save
       redirect_to matches_path
     else
-      redirect_to matches_new_path
+      redirect_to new_match_path
     end
   end
 

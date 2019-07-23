@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MatchDecorator < Draper::Decorator
   delegate_all
   decorates_association :game
@@ -6,7 +8,11 @@ class MatchDecorator < Draper::Decorator
 
   def player1_info
     h.capture do
-      h.concat h.image_tag player1.avatar_mini, alt: player1.email, title: player1.email
+      if player1.nil?
+        h.concat h.image_tag h.asset_pack_path('images/default_avatar_mini.png')
+      else
+        h.concat h.image_tag player1.avatar_mini, alt: player1.email, title: player1.email
+      end
       h.concat h.tag.span(score1.to_i, class: 'font-weight-bold ml-2 mr-2')
     end
   end
@@ -14,7 +20,11 @@ class MatchDecorator < Draper::Decorator
   def player2_info
     h.capture do
       h.concat h.tag.span(score2.to_i, class: 'font-weight-bold ml-2 mr-2')
-      h.concat h.image_tag player2.avatar_mini, alt: player2.email, title: player2.email
+      if player2.nil?
+        h.concat h.image_tag h.asset_pack_path('images/default_avatar_mini.png')
+      else
+        h.concat h.image_tag player2.avatar_mini, alt: player2.email, title: player2.email
+      end
     end
   end
 
@@ -29,5 +39,4 @@ class MatchDecorator < Draper::Decorator
       h.tag.span 'finished'.capitalize, class: 'badge badge-secondary'
     end
   end
-
 end

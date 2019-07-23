@@ -10,6 +10,7 @@ class MatchesController < ApplicationController
 
   def new
     @match = Match.new
+    authorize @match
     @current_user_games = current_user.games
     @gamer_profiles = GamerProfile.all
     @users = User.where.not(id: current_user.id)

@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 2019_07_22_115102) do
 
   create_table "auth_tokens", force: :cascade do |t|
     t.string "token"
-    t.bigint "expire_time", default: 1563887139
+    t.bigint "expire_time", default: 1564001636
     t.boolean "active", default: true
     t.bigint "user_id"
     t.datetime "created_at", null: false

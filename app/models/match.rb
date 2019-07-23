@@ -1,5 +1,6 @@
-class Match < ApplicationRecord
+# frozen_string_literal: true
 
+class Match < ApplicationRecord
   # Associations
   belongs_to :game
   belongs_to :player1, class_name: 'User'
@@ -34,5 +35,4 @@ class Match < ApplicationRecord
   def distinct_players
     errors.add(:base, :duplicate_players) if player1 == player2
   end
-
 end

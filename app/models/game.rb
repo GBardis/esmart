@@ -1,8 +1,9 @@
-class Game < ApplicationRecord
+# frozen_string_literal: true
 
+class Game < ApplicationRecord
   # Associations
-  has_many :gamer_profiles
-  has_many :users, through: :gamer_profiles
+  has_many :gamer_profiles, dependent: :destroy
+  has_many :users, through: :gamer_profiles, dependent: :destroy
   has_many :matches
 
   has_one_attached :logo
@@ -13,5 +14,4 @@ class Game < ApplicationRecord
 
   # Scopes
   scope :enabled, -> { where(enabled: true) }
-
 end

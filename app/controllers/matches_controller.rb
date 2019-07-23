@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 class MatchesController < ApplicationController
   include Pundit
 
   def index
-    @matches = policy_scope(Match).
-        includes(:game, :player1, :player2).
-        order(created_at: :desc).
-        decorate
+    @matches = policy_scope(Match)
+               .includes(:game, :player1, :player2)
+               .order(created_at: :desc)
+               .decorate
   end
 
   def new
@@ -17,6 +19,4 @@ class MatchesController < ApplicationController
   end
 
   private
-  
-
 end
